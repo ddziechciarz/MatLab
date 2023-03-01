@@ -13,15 +13,12 @@ A = sqrt(2/N)*cos( pi/N *(k'*n));
 canary_freq_spectrum = A * canary;
 elephant_freq_spectrum = A * elephant;
 figure; plot(canary_freq_spectrum); title('widko kanarka');
-figure; plot(elephant_freq_spectrum); title('widmo słonia');
+figure; plot(elephant_freq_spectrum); title('widmo sło');
 % widmo czestotliwosciowe laczonej sciezki dzwiekowej
 canele_fs = A * canele;
-figure; plot(canele_fs); title('widmo słonia+kanarka');
+figure; plot(canele_fs); title('canele freq spec');
 % odejmuje od laczonego widma, widmo kanarka
 back_canary_fs = canele_fs - elephant_freq_spectrum;
-figure; plot(back_canary_fs); title("odtworzone widmo kanarka");
 % zmieniam widmo spowrotem na sciezke dzwiekową
 back_canary    = A^-1 * back_canary_fs;
-back_canary2    = inv(A) * back_canary_fs;
-sum = back_canary - back_canary2;
-figure; plot(back_canary); title('odtworzony kanarek');
+figure; plot(back_canary); title('back_canary');

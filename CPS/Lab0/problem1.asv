@@ -1,0 +1,33 @@
+fs = 44100;
+ts = 1/fs;
+ds = 5000/fs;
+
+x = [];
+
+t = 1/44100:1/44100:10; % czas trwania 10 s, częstotliwość próbkowania fs=44100 Hz
+
+for t =0:1/44100:10
+
+
+end
+
+for i=0:9
+    for j=1:44100
+        x(end+1) = sin(2*pi * (1000 + i*5000 + j*ds) *t(i*44100+j));
+
+    end
+end
+plot(x);
+audiowrite('sygnal.wav', x, 44100); % zapis sygnału do pliku audio
+
+
+%zad1
+% clear all; close all;
+% t = 0:1/44100:10; % czas trwania 10 s, częstotliwość próbkowania fs=44100 Hz
+% f0 = 1000; % początkowa częstotliwość f1=1000 Hz
+% f1 = f0 + 5000*t; % funkcja liniowo wzrastającej częstotliwości
+% y = chirp(t, f0, 10, f1(end), 'linear', 90); % generowanie sygnału sinusoidalnego
+% plot(t,y); title("sinusoida");
+% audiowrite('sygnal.wav', y, 44100); % zapis sygnału do pliku audio
+% [y, fs] = audioread('sygnal.wav'); % wczytanie pliku audio
+% soundsc(y, fs); % odtworzenie sygnału

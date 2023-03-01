@@ -24,7 +24,7 @@ pause;
 absError=0;
 error=0;
 for i=1:1:255
-    for a=1:1:255
+    for a=1:1:255 
         absError = absError + (double(abs(img(i,a)) - double(imgResized(i,a))));
         error = error + (double(img(i,a)) - double(imgResized(i,a)));        
     end

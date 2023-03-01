@@ -5,11 +5,12 @@ P = [
    [2 2];
    [3 3];
 ];
-figure; myPlot2D(P); title("Przed");
-figure; myPlot2D(P * rotationMatrixDeg2D(90)); title("Po");
-%babiaGora = load('babia_gora.dat');
-%myPlot(babiaGora); title("Przed");
-%figure; myPlot(babiaGora * rotationMatrixDeg(180, 90, 0)); title("Po");
+%figure; myPlot2D(P); title("Przed");
+%figure; myPlot2D(P * rotationMatrixDeg2D(90)); title("Po");
+babiaGora = load('babia_gora.dat');
+babiaGora(:,3) = babiaGora(:,3) / 200;
+myPlot(babiaGora); title("Przed"); grid on;
+figure; myPlot(babiaGora * rotationMatrixDeg(0, 60, 0)); title("Po"); grid on;
 
 % Functions
 function myPlot(P)
@@ -21,10 +22,12 @@ end
 function [A] = rotationMatrix(yaw, pitch, roll)
    % (yaw, pitch, roll) are rotations about: (z, y, x)
    A = [
-       [cos(yaw)*cos(pitch)    cos(yaw)*sin(pitch)*sin(roll)-sin(yaw)*cos(roll)    cos(yaw)*sin(pitch)*cos(roll)+sin(yaw)*sin(roll)    ];
+       [cos()*cos()    cos(yaw)*sin(pitch)*sin(roll)-sin(yaw)*cos(roll)    cos(yaw)*sin(pitch)*cos(roll)+sin(yaw)*sin(roll)    ];
        [sin(yaw)*cos(pitch)    sin(yaw)*sin(pitch)*sin(roll)+cos(yaw)*cos(roll)    sin(yaw)*sin(pitch)*cos(roll)-cos(yaw)*sin(roll)    ];
-       [-sin(pitch)            cos(pitch)*sin(pitch)                               cos(pitch)*cos(yaw)                                 ];
+       [-sin(pitch)            cos(pitch)*sin(yaw)                               cos(pitch)*cos(yaw)                                 ];
    ];
+
+   
 end
 function [A] = rotationMatrix2D(a)
    A = [

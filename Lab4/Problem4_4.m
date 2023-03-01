@@ -1,5 +1,3 @@
-clc;
-clear all; close all;
 % equnonlin_invmat.m
 % A*x = b, x=?
 clear all; close all;
@@ -12,10 +10,9 @@ x1 = inv(A)*b,          % x=A^(-1)*b
 x2 = A\b,               % optymalne rozwiazywanie rown. Ax=b
 %x3 = pinv(A)*b,        % x = inv( A'*A ) * A' * b , sprawdzisz?
 bhat = A*x1,            % sprawdzenie
-err = max(abs(x1-x2)),  % blad
+err = max(abs(x1-x2)),% blad
+%err2 = max(abs(x1-x3)),
 %Oryginalnie wszystko ok.
-pause
-clc
 
 %Przy zmianie wyznacznika z -2 na 1 nadal wszystko ok
 %Przy zmianie wyznacznika z -2 na 0.5 (A(1,2) == 7/6) err wynosi 1,7764e-15
@@ -25,8 +22,8 @@ x3 = inv(A)*b,
 x4 = A\b,
 bhat = A*x2,
 err = max(abs(x3-x4)),
-pause
-clc
+
+
 
 %W tym przypadku b różni się nieznacznie od oryginalnego a err wynosi 4.4409e-16
 %Wektor x również się różni

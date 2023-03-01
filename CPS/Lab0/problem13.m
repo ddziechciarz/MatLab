@@ -1,9 +1,9 @@
 clear all; close all;
 load ECG100.mat; whos;
 x = val(1,:);
-plot(x); title('unscaled graph'); figure; % 289 probek to 1/72 minuty (1 okres) czyli 347 probki/s
+plot(x); title('unscaled graph'); figure; % 289 probek to 1/72 minuty (1 okres) czyli 346,8 probki/s
 
-fpr = 345;
+fpr = 347;
 N = length(x);
 dt = 1/fpr;
 t = dt * (0:N-1);
