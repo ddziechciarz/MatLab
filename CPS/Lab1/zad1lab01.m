@@ -66,85 +66,85 @@ end
 
 title('Porównanie sinusoid o różnych częstotliwościach')
 axis([0 1 -1 1]) % ustalenie zakresów osi
-%%%%D- SFM- sinusoidalna modulacja częstotliwosci
-td=0:1/fs1:1; %1 sek
-fn=50; %czestotliwosc nosna
-fm=1; %czestotlisco moudlujaca 
-df=5; %glebokosc modulacji 
-%% pdpk 1- wyswietl sygnal zmodulowany i modulujacy na jednym wykresie
-figure (5);
-carrier = sin(2*pi*fn*t);% sygnał nośny
-modulator = sin(2*pi*fm*t);% sygnał modulujący
-modulated = sin(2*pi*(fn+df*modulator).*t);% sygnał zmodulowany
-plot(t, modulated, 'b');hold on;
-plot(t, modulator, 'r-');
-title('pdpk D podpunkt 1)');
-legend('Sygnał zmodulowany', 'Sygnał modulujący');
-xlim([0 1]);
-%%pdpkt 2-sprobkuj sygnal zmodulowany i porownaj z sygnalem analogowym na
-%%jdedynym wykresie
-% parametry sygnału
-fs = 10e3;
-fn = 50;
-fm = 1;
-df = 5;
-% osie czasu
-t = linspace(0, 1, 1*fs);
-
-% sygnał nośny
-noisy_signal = sin(2*pi*fn*t);
-
-% sygnał modulujący
-modulating_signal = sin(2*pi*fm*t);
-
-% sygnał zmodulowany
-modulated_signal = sin(2*pi*(fn + df*modulating_signal).*t);
-
-% próbkowanie sygnału zmodulowanego
-fs_sampled = 25;
-t_sampled = linspace(0, 1, 1*fs_sampled);
-modulated_signal_sampled = sin(2*pi*(fn + df*sin(2*pi*fm*t_sampled)).*t_sampled);
-
-% wykres sygnałów
-figure;
-subplot(2,1,1);
-plot(t, modulated_signal, 'b');
-hold on;
-plot(t, modulating_signal, 'r');
-title('Sygnał zmodulowany i sygnał modulujący');
-legend('Sygnał zmodulowany', 'Sygnał modulujący');
-subplot(2,1,2);
-plot(t, modulated_signal, 'b');
-hold on;
-stem(t_sampled, modulated_signal_sampled, 'r');
-title('Sygnał zmodulowany i próbkowany sygnał zmodulowany');
-legend('Sygnał zmodulowany', 'Próbkowany sygnał zmodulowany');
-
-% błędy próbkowania
-figure;
-plot(t, modulated_signal, 'b');
-hold on;
-stem(t_sampled, modulated_signal_sampled, 'r');
-title('Błędy próbkowania sygnału zmodulowanego');
-legend('Sygnał zmodulowany', 'Próbkowany sygnał zmodulowany');
-xlim([0 1]); % musze ogadnac o co tu biega bo to skopiowane z chatgpt ale wyglada mądrze zrobie notatki i oganre
-% Wygenerowanie próbkowanego sygnału zmodulowanego
-y_modulated = sin(2*pi*fn*t + df*sin(2*pi*fm*t)); % sygnał zmodulowany
-y_modulated_sampled = resample(y_modulated, fs_sampled, fs);
-t_sampled = 0:1/fs_sampled:(length(y_modulated_sampled)-1)/fs_sampled;
-
-% Widmo gęstości mocy sygnału przed próbkowaniem
-[P, f] = pspectrum(y_modulated, fs, 'power');
-figure;
-plot(f, P);
-title('Widmo gęstości mocy sygnału przed próbkowaniem');
-xlabel('Częstotliwość [Hz]');
-ylabel('Moc [dB]');
-xlim([0 12.5]);
-
-% Widmo gęstości mocy sygnału po próbkowaniu
-[P_sampled, f_sampled] = pspectrum(y_modulated_sampled, fs_sampled, 'power');
-figure;
-plot(f_sampled, P_sampled);
-xlim([0 12.5]);
-title('Widmo gęstości mocy sygnału po próbkowaniu');
+% %%%%D- SFM- sinusoidalna modulacja częstotliwosci
+% td=0:1/fs1:1; %1 sek
+% fn=50; %czestotliwosc nosna
+% fm=1; %czestotlisco moudlujaca 
+% df=5; %glebokosc modulacji 
+% %% pdpk 1- wyswietl sygnal zmodulowany i modulujacy na jednym wykresie
+% figure (5);
+% carrier = sin(2*pi*fn*t);% sygnał nośny
+% modulator = sin(2*pi*fm*t);% sygnał modulujący
+% modulated = sin(2*pi*(fn+df*modulator).*t);% sygnał zmodulowany
+% plot(t, modulated, 'b');hold on;
+% plot(t, modulator, 'r-');
+% title('pdpk D podpunkt 1)');
+% legend('Sygnał zmodulowany', 'Sygnał modulujący');
+% xlim([0 1]);
+% %%pdpkt 2-sprobkuj sygnal zmodulowany i porownaj z sygnalem analogowym na
+% %%jdedynym wykresie
+% % parametry sygnału
+% fs = 10e3;
+% fn = 50;
+% fm = 1;
+% df = 5;
+% % osie czasu
+% t = linspace(0, 1, 1*fs);
+% 
+% % sygnał nośny
+% noisy_signal = sin(2*pi*fn*t);
+% 
+% % sygnał modulujący
+% modulating_signal = sin(2*pi*fm*t);
+% 
+% % sygnał zmodulowany
+% modulated_signal = sin(2*pi*(fn + df*modulating_signal).*t);
+% 
+% % próbkowanie sygnału zmodulowanego
+% fs_sampled = 25;
+% t_sampled = linspace(0, 1, 1*fs_sampled);
+% modulated_signal_sampled = sin(2*pi*(fn + df*sin(2*pi*fm*t_sampled)).*t_sampled);
+% 
+% % wykres sygnałów
+% figure;
+% subplot(2,1,1);
+% plot(t, modulated_signal, 'b');
+% hold on;
+% plot(t, modulating_signal, 'r');
+% title('Sygnał zmodulowany i sygnał modulujący');
+% legend('Sygnał zmodulowany', 'Sygnał modulujący');
+% subplot(2,1,2);
+% plot(t, modulated_signal, 'b');
+% hold on;
+% stem(t_sampled, modulated_signal_sampled, 'r');
+% title('Sygnał zmodulowany i próbkowany sygnał zmodulowany');
+% legend('Sygnał zmodulowany', 'Próbkowany sygnał zmodulowany');
+% 
+% % błędy próbkowania
+% figure;
+% plot(t, modulated_signal, 'b');
+% hold on;
+% stem(t_sampled, modulated_signal_sampled, 'r');
+% title('Błędy próbkowania sygnału zmodulowanego');
+% legend('Sygnał zmodulowany', 'Próbkowany sygnał zmodulowany');
+% xlim([0 1]); % musze ogadnac o co tu biega bo to skopiowane z chatgpt ale wyglada mądrze zrobie notatki i oganre
+% % Wygenerowanie próbkowanego sygnału zmodulowanego
+% y_modulated = sin(2*pi*fn*t + df*sin(2*pi*fm*t)); % sygnał zmodulowany
+% y_modulated_sampled = resample(y_modulated, fs_sampled, fs);
+% t_sampled = 0:1/fs_sampled:(length(y_modulated_sampled)-1)/fs_sampled;
+% 
+% % Widmo gęstości mocy sygnału przed próbkowaniem
+% [P, f] = pspectrum(y_modulated, fs, 'power');
+% figure;
+% plot(f, P);
+% title('Widmo gęstości mocy sygnału przed próbkowaniem');
+% xlabel('Częstotliwość [Hz]');
+% ylabel('Moc [dB]');
+% xlim([0 12.5]);
+% 
+% % Widmo gęstości mocy sygnału po próbkowaniu
+% [P_sampled, f_sampled] = pspectrum(y_modulated_sampled, fs_sampled, 'power');
+% figure;
+% plot(f_sampled, P_sampled);
+% xlim([0 12.5]);
+% title('Widmo gęstości mocy sygnału po próbkowaniu');
