@@ -21,6 +21,9 @@ figure;
 for m=0:K-1
     X(m*N+1:(m+1)*N)=fft(xtemp(m*N+1:(m+1)*N));
     text=strcat('Widmo ramki m=', int2str(m));
+    plot(xtemp(m*N+1:(m+1)*N));
+    title(strcat('Sygnał ramki m=', int2str(m)));
+    pause; 
     plot(fs*(0:N-1)/N,abs(X(m*N+1:(m+1)*N)), 'b-');
     title(text);
     xlabel('Czêstotliwość [Hz]');

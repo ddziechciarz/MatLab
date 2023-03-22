@@ -32,6 +32,9 @@ x01 = A1*cos(2*pi*f1*tfs1 + o1);
 x02 = A2*cos(2*pi*f2*tfs2 + o2);
 x =  x01 + x02; % sygnal x %
 
+figure;
+plot(x);
+
 % X = fft(x)./N; % dft sygnału x %
 
 

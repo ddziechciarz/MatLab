@@ -67,6 +67,7 @@ rX = real(X); %część rzeczywista
 imX = imag(X); %część urojona
 zX = abs(X); %moduł
 phX = angle(X); %faza
+%phX = sqrt(rX.^2 + imX.^2);
 
 f = fs*(0:N-1)/N;
 
