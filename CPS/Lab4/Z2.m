@@ -4,17 +4,21 @@ close all;
 N = 1024;
 x = randn( 1, N );
 
+
+tic
 X0 = fft(x); % zwykłe dft dla porownania z N/2
+toc
 
 for n = 1:(N/2)
     y(n) = x(2*n-1) + 1i*x(2*n);
 end
 
+tic
 Y = fft(y);
+toc
 
-
-for k = 2:(N/2)
-    X(k) = 0.5*(Y(k)+conj(Y((N/2) - k+2))) + 0.5*1i*exp(-1i*2*pi*k/N)*(conj(Y((N/2)-k+2))-Y(k));
+for k = 1:(N/2)
+    X(k) = 0.5*(Y(k)+conj(Y((N/2) - k+1))) + 0.5*1i*exp(-1i*2*pi*k/N)*(conj(Y((N/2)-k+1))-Y(k));
 end
 
 
@@ -36,6 +40,6 @@ stem(abs(X));
 xlim([1 N])
 title('DFT z N/2 zespolonej');
 
-err = mean(abs(X(2:end) - X0))
-err2 = mean(abs(X(1:end-1) - X0))
+err = abs(mean(X(2:end) - X0))
+err2 = abs(mean(X(1:end-1) - X0))
 

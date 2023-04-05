@@ -2,12 +2,13 @@ clear all;
 close all;
 
 %% Dane
-fs = 256000; % czêstotliwoœæ próbkowania w Hz
+fs = 256000; % częstotliwość próbkowania w Hz
 
 figure(1);
 %% butterwortha
 subplot(2,4,1);
-[b,a] = butter(4,0.5);
+[n, Wn] = buttord(64000/(fs+100/2), 128000/(fs+100/2), 3, 40);
+[b,a] = butter(n,Wn);
 H=freqz(b,a,fs); %odpowiedz czestotliwosciowa
 Hm=abs(H); HmdB=20*log10(Hm);
 plot(HmdB,'k'); grid; 
@@ -18,7 +19,8 @@ plot(b,'r o');
 
 %% czebyszew 1
 subplot(2,4,2);
-[b,a] = cheby1(4,3,0.5);
+[n, Wn] = cheb1ord(64000/(fs+100/2), 128000/(fs+100/2), 3, 40);
+[b,a] = cheby1(n,3,Wn);
 H=freqz(b,a,fs);
 Hm=abs(H); HmdB=20*log10(Hm);
 plot(HmdB,'k'); grid; 
@@ -29,7 +31,8 @@ plot(b,'r o');
 
 %% czebyszew 2
 subplot(2,4,3);
-[b,a] = cheby2(4,3,0.5);
+[n, Wn] = cheb2ord(64000/(fs+100/2), 128000/(fs+100/2), 3, 40);
+[b,a] = cheby2(n,40,Wn);
 H=freqz(b,a,fs);
 Hm=abs(H); HmdB=20*log10(Hm);
 plot(HmdB,'k'); grid; 
@@ -40,7 +43,8 @@ plot(b,'r o');
 
 %% eliptyczny
 subplot(2,4,4);
-[b,a] = ellip(4,3,40,0.5);
+[n, Wn] = ellipord(64000/(fs+100/2), 128000/(fs+100/2), 3, 40);
+[b,a] = ellip(n,3,40,Wn);
 H=freqz(b,a,fs);
 Hm=abs(H); HmdB=20*log10(Hm);
 plot(HmdB,'k'); grid;
