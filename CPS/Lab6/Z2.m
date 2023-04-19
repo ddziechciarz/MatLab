@@ -19,7 +19,7 @@ clear all; close all;
 % tego sygnału (funkcjaspectrogram
 
 figure('Name', 'wykres czasowo-częstotliwościowy sygnału s6');
-set(figure(2),'units','points','position',[0,400,400,350]);
+set(figure(2),'units','points');
 spectrogram(s6, 4096, 4096-512, [0:5:2000], fs);
 title('wykres czasowo-częstotliwościowy sygnału s6');
 % Wyszło 39335
@@ -51,7 +51,7 @@ an = poly(pd);
 y6 = filter(bm,an,s6);
 
 figure('Name', 'wykres czasowo-częstotliwościowy sygnału y6 (po filtracji BP)');
-set(figure(3),'units','points','position',[0,30,400,306]);
+set(figure(3),'units','points');
 spectrogram(y6, 4096, 4096-512, [0:5:2000], fs);
 title('wykres czasowo-częstotliwościowy sygnału y6');
 
@@ -61,7 +61,7 @@ title('wykres czasowo-częstotliwościowy sygnału y6');
 
 t = dt*(0:N-1);
 figure('Name', 'Porównanie sygnałów w dziedzinie czasu');
-set(figure(4),'units','points','position',[400,30,1040,720]);
+set(figure(4),'units','points');
 
 subplot(2,1,1);
 plot(t, s6,'b');

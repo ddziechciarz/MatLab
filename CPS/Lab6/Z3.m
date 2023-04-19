@@ -1,4 +1,3 @@
-%% odbiornik FM: P. Swiatkiewicz, T. Twardowski, T. Zielinski, J. Bułat
 clc;
 clear all; close all;
 

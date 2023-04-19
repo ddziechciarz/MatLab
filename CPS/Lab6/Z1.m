@@ -1,8 +1,6 @@
-
+clc;
 % Zadanie 1 - Filtr cyfrowy IIR
 clear all; close all;
-
-% Instrukcja do zadani
 
 %%
 % W pliku butter.mat znajdują się z-zera, p-bieguny 
@@ -47,16 +45,14 @@ Xlog = 20*log10(abs(X));
 
 t = dt*(0:N-1);
 figure('Name', 'Sygnał');
-set(figure(1),'units','points');
 plot(t, x,'b');
 title('Sygnał wejściowy x');
 xlabel('Czas [s]');
 ylabel('Amplituda [V]');
 grid;
+%koniec sygnalu wej
 
 figure('Name', 'Charakterystyka amplitudowo-częstotliwościowa sygnału wejściowego');
-set(figure(2),'units','points');
-
 subplot(1,2,1);
 plot(f, abs(X),'b');
 title('Charakterystyka X w skali liniowej');
@@ -104,12 +100,14 @@ Hdlog = 20*log10(abs(Hd));
 %% Porównanie filtrów
 
 figure('Name', 'Filtry analogowy i cyfrowy');
-set(figure(3),'units','points');
 hold on;
 plot(f, Halog,'b');
 plot(f, Hdlog,'r');
 plot([1189 1189], [-70 20], 'k');
 plot([1229 1229], [-70 20], 'k');
+plot([1169 1169], [-70 20], 'g');
+plot([1206 1206], [-70 20], 'g');
+
 title('Filtr analogowy i cyfrowy (Ha, Hd)');
 legend('Analogowy','Cyfrowy');
 xlabel('Częstotliwość [Hz]');
@@ -135,7 +133,8 @@ M = length(bm);
 xnm = zeros(1, M);
 ynk = zeros(1, N);
 
-for n = 1:16e3
+for n = 1:16e3 %obliczane są kolejne próbki sygnału wyjściowego y2 
+    % na podstawie wcześniejszych próbek sygnałów wejściowego x i wyjściowego ynk.
     xnm    = [x(n)  xnm(1:M-1)];
     y2(n) = sum(xnm.*bm) - sum(ynk.*ak);
     ynk    = [y2(n) ynk(1:N-1)];
@@ -150,16 +149,15 @@ Y2    = fft(y2)/max(fft(y2));
 Y2log = 20*log10(abs(Y2));
 
 figure('Name', 'Charakterystyka amplitudowo-częstotliwościowa sygnału wyjściowego');
-set(figure(4),'units','points');
 
 subplot(1,2,1);
 hold on;
 plot(f, abs(Y1),'b');
-plot(f, abs(Y2),'r');
+plot(f, abs(Y2),'ro');
 title('Charakterystyka Y w skali liniowej');
 xlabel('Częstotliwość [Hz]');
 ylabel('Amplituda [V/V]');
-legend('matlab','własny');
+legend('funkcja filter','własny');
 %xlim([0 8000]);
 xlim([1100 1300]);
 ylim([0 1.2]);
@@ -179,4 +177,3 @@ xlim([1100 1300]);
 ylim([-70 10]);
 grid;
 hold off;
-
